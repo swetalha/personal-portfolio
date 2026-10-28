@@ -30,6 +30,24 @@ function Header({ current }) {
   );
 }
 
+function About({ current }) {
+  return (
+    <div id="about" className="box">
+      <div className="max-w-[600px]">
+        <h1 className="animate-float">
+          Hey! I'm Talha, and
+          <br />
+          I'm a Full Stack Developer.
+        </h1>
+        <p className="text-[18px] mt-6">
+          I'm an enthusiastic, self-taught developer who loves building
+          beautiful and functional web apps.
+        </p>
+      </div>
+    </div>
+  );
+}
+
 function Footer() {
   return (
     <footer className="w-full h-24 flex justify-center items-start absolute bottom-0">
@@ -77,11 +95,23 @@ function Footer() {
   );
 }
 
+function Projects() {}
+
 function App() {
+  const [current, setCurrent] = useState("about");
+
   return (
     <div className="w-full h-full">
-      <Header current="resume" />
-      <main></main>
+      <Header current={current} />
+      <main>
+        <About />
+        <div id="projects" className="box active-box">
+          <h2 className="animate-float">Here's some stuff I built.</h2>
+          <div className="box-projects"></div>
+        </div>
+        <div id="skills" className="box"></div>
+        <div id="resume" className="box"></div>
+      </main>
       <Footer />
     </div>
   );

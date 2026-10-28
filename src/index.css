@@ -3,6 +3,20 @@
 @tailwind utilities;
 @import url("https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
+@theme {
+  --animate-float: float 3s ease-in-out infinite;
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-12px);
+    }
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -25,6 +39,11 @@ h1,
 h2,
 h3 {
   font-family: "Google Sans";
+  font-weight: 600;
+}
+
+h1 {
+  @apply text-5xl;
 }
 
 ul {
@@ -45,4 +64,12 @@ ul {
 
 .active-link {
   @apply bg-[#fff] text-[#000] opacity-100;
+}
+
+.box {
+  @apply opacity-0 invisible w-full flex justify-center items-center pt-20;
+}
+
+.active-box {
+  @apply opacity-100 visible;
 }
