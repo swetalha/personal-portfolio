@@ -46,6 +46,14 @@ h1 {
   @apply text-5xl;
 }
 
+h2 {
+  @apply text-4xl;
+}
+
+h3 {
+  @apply text-3xl;
+}
+
 ul {
   @apply font-[500] text-[18px];
 }
@@ -58,8 +66,13 @@ ul {
   @apply flex flex-col items-center;
 }
 
+a,
+button {
+  @apply rounded-2xl px-4 py-2;
+}
+
 .header-links {
-  @apply rounded-2xl px-4 py-2 opacity-60;
+  @apply opacity-60;
 }
 
 .active-link {
@@ -67,9 +80,25 @@ ul {
 }
 
 .box {
-  @apply opacity-0 invisible w-full flex justify-center items-center pt-20;
+  @apply absolute top-0 opacity-0 invisible w-full flex justify-center items-center pt-20;
 }
 
 .active-box {
   @apply opacity-100 visible;
+}
+
+.img-project {
+  @apply rounded-xl w-full;
+}
+
+button {
+  @apply text-[18px] font-[500];
+}
+
+.box-projects {
+  @apply flex gap-6;
+}
+
+.box-project {
+  @apply flex flex-col gap-4 items-start;
 }

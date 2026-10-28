@@ -1,29 +1,48 @@
 import { useState } from "react";
 
+const arrProjects = [
+  {
+    name: "Banktist- A Banking App",
+    src: "/banktist.png",
+    link: "https://banktist-banking.vercel.app/",
+  },
+];
+
 function Header({ current }) {
   return (
     <header className="w-full h-24 flex justify-center items-center">
       <ul className="flex gap-14">
-        <li
-          className={`header-links ${current === "about" ? "active-link" : ""}`}
-          onClick={(event) => console.log(event)}
-        >
-          <a href="#about">About</a>
+        <li onClick={(event) => console.log(event)}>
+          <a
+            href="#about"
+            className={`header-links ${current === "about" ? "active-link" : ""}`}
+          >
+            About
+          </a>
         </li>
-        <li
-          className={`header-links ${current === "projects" ? "active-link" : ""}`}
-        >
-          <a href="#projects">Projects</a>
+        <li>
+          <a
+            href="#projects"
+            className={`header-links ${current === "projects" ? "active-link" : ""}`}
+          >
+            Projects
+          </a>
         </li>
-        <li
-          className={`header-links ${current === "skills" ? "active-link" : ""}`}
-        >
-          <a href="#skills">Skills</a>
+        <li>
+          <a
+            href="#skills"
+            className={`header-links ${current === "skills" ? "active-link" : ""}`}
+          >
+            Skills
+          </a>
         </li>
-        <li
-          className={`header-links ${current === "resume" ? "active-link" : ""}`}
-        >
-          <a href="#resume">Resume</a>
+        <li>
+          <a
+            href="#resume"
+            className={`header-links ${current === "resume" ? "active-link" : ""}`}
+          >
+            Resume
+          </a>
         </li>
       </ul>
     </header>
@@ -95,20 +114,51 @@ function Footer() {
   );
 }
 
-function Projects() {}
+function Project({ name, src, link }) {
+  return (
+    <div className="project-banktist box-project">
+      <a
+        href={link}
+        target="_blank"
+        rel="noreferrer"
+        className="py-0 px-0 rounded-none underline"
+      >
+        <h2>{name}</h2>
+      </a>
+      <img src={src} alt="project-image" className="img-project" />
+      <button className="active-link">Explore</button>
+    </div>
+  );
+}
+
+function Projects() {
+  return (
+    <div id="projects" className="box active-box">
+      <div className="max-w-[600px] h-[600px]">
+        <h1>Some Projects I've built</h1>
+        <div className="box-projects my-8">
+          {arrProjects.map((project) => (
+            <Project
+              name={project.name}
+              src={project.src}
+              link={project.link}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function App() {
-  const [current, setCurrent] = useState("about");
+  const [current, setCurrent] = useState("projects");
 
   return (
     <div className="w-full h-full">
       <Header current={current} />
-      <main>
+      <main className="relative">
         <About />
-        <div id="projects" className="box active-box">
-          <h2 className="animate-float">Here's some stuff I built.</h2>
-          <div className="box-projects"></div>
-        </div>
+        <Projects />
         <div id="skills" className="box"></div>
         <div id="resume" className="box"></div>
       </main>
