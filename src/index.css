@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Inter";
+  background: #000000;
+  background-image: url("/public/portfolio-bg.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  color: #fff;
+  letter-spacing: -1px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Google Sans";
+}
+
+ul {
+  @apply font-[500] text-[18px];
+}
+
+.img-socials {
+  @apply w-10;
+}
+
+.footer-links {
+  @apply flex flex-col items-center;
+}
+
+.header-links {
+  @apply rounded-2xl px-4 py-2 opacity-60;
+}
+
+.active-link {
+  @apply bg-[#fff] text-[#000] opacity-100;
+}
