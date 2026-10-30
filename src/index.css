@@ -84,7 +84,7 @@ button {
 }
 
 .box {
-  @apply absolute top-0 opacity-0 invisible w-full flex justify-center items-center pt-20;
+  @apply absolute top-0 opacity-0 invisible w-full flex flex-col justify-center items-center pt-20;
   transition: all 0.5s ease-in-out;
 }
 
