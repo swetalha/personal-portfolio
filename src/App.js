@@ -6,16 +6,25 @@ const arrProjects = [
     src: "/banktist.png",
     link: "https://banktist-banking.vercel.app/",
   },
+  {
+    name: "Eat-n-Split - Splitting Bills",
+    src: "/eat-n-split.png",
+    link: "https://eat-n-split-mu-smoky.vercel.app/",
+  },
 ];
 
-function Header({ current }) {
+function Header({ currentScreen, setCurrent }) {
+  const handleClick = (event) => setCurrent(event.target.dataset.section);
+
   return (
     <header className="w-full h-24 flex justify-center items-center">
       <ul className="flex gap-14">
-        <li onClick={(event) => console.log(event)}>
+        <li>
           <a
             href="#about"
-            className={`header-links ${current === "about" ? "active-link" : ""}`}
+            className={`header-links ${currentScreen === "about" ? "active-link" : ""}`}
+            onClick={handleClick}
+            data-section="about"
           >
             About
           </a>
@@ -23,7 +32,9 @@ function Header({ current }) {
         <li>
           <a
             href="#projects"
-            className={`header-links ${current === "projects" ? "active-link" : ""}`}
+            className={`header-links ${currentScreen === "projects" ? "active-link" : ""}`}
+            onClick={handleClick}
+            data-section="projects"
           >
             Projects
           </a>
@@ -31,7 +42,9 @@ function Header({ current }) {
         <li>
           <a
             href="#skills"
-            className={`header-links ${current === "skills" ? "active-link" : ""}`}
+            className={`header-links ${currentScreen === "skills" ? "active-link" : ""}`}
+            onClick={handleClick}
+            data-section="skills"
           >
             Skills
           </a>
@@ -39,7 +52,9 @@ function Header({ current }) {
         <li>
           <a
             href="#resume"
-            className={`header-links ${current === "resume" ? "active-link" : ""}`}
+            className={`header-links ${currentScreen === "resume" ? "active-link" : ""}`}
+            onClick={handleClick}
+            data-section="resume"
           >
             Resume
           </a>
@@ -49,9 +64,12 @@ function Header({ current }) {
   );
 }
 
-function About({ current }) {
+function About({ currentScreen }) {
   return (
-    <div id="about" className="box">
+    <div
+      id="about"
+      className={`box ${currentScreen === "about" ? `active-box` : ``} `}
+    >
       <div className="max-w-[600px]">
         <h1 className="animate-float">
           Hey! I'm Talha, and
@@ -114,51 +132,82 @@ function Footer() {
   );
 }
 
-function Project({ name, src, link }) {
+function Project({ name, src, link, active }) {
   return (
-    <div className="project-banktist box-project">
-      <a
-        href={link}
-        target="_blank"
-        rel="noreferrer"
-        className="py-0 px-0 rounded-none underline"
-      >
+    <div className={`box-project ${active ? `active-box` : `inactive-box`}`}>
+      <a href={link} target="_blank" rel="noreferrer">
         <h2>{name}</h2>
       </a>
-      <img src={src} alt="project-image" className="img-project" />
+      <img src={src} alt="img-project" className="w-[600px] rounded-xl" />
       <button className="active-link">Explore</button>
     </div>
   );
 }
 
-function Projects() {
+function Projects({ currentScreen }) {
+  const [currentProject, setProject] = useState(0);
+
+  const handleNext = () =>
+    setProject((current) =>
+      current >= arrProjects.length - 1 ? 0 : current + 1,
+    );
+  const handlePrevious = () =>
+    setProject((current) =>
+      current <= 0 ? arrProjects.length - 1 : current - 1,
+    );
+
   return (
-    <div id="projects" className="box active-box">
-      <div className="max-w-[600px] h-[600px]">
-        <h1>Some Projects I've built</h1>
-        <div className="box-projects my-8">
-          {arrProjects.map((project) => (
+    <div
+      id="projects"
+      className={`box flex-col gap-8 ${currentScreen === "projects" ? `active-box` : ``}`}
+    >
+      <h1>Projects I've Built</h1>
+      <div className="box-projects-slider">
+        <button
+          className="btn-slider btn-slider-left active-link"
+          onClick={handlePrevious}
+        >
+          <img
+            src="/arrow-left-solid-full.svg"
+            alt="slider-icon"
+            className="slider-icon"
+          />
+        </button>
+        <div className="box-projects relative">
+          {arrProjects.map((project, i) => (
             <Project
               name={project.name}
               src={project.src}
               link={project.link}
+              active={currentProject === i ? true : false}
+              key={project.link}
             />
           ))}
         </div>
+        <button
+          className="btn-slider btn-slider-right active-link"
+          onClick={handleNext}
+        >
+          <img
+            src="/arrow-right-solid-full.svg"
+            alt="slider-icon"
+            className="slider-icon"
+          />
+        </button>
       </div>
     </div>
   );
 }
 
 function App() {
-  const [current, setCurrent] = useState("projects");
+  const [currentScreen, setCurrent] = useState("about");
 
   return (
     <div className="w-full h-full">
-      <Header current={current} />
-      <main className="relative">
-        <About />
-        <Projects />
+      <Header currentScreen={currentScreen} setCurrent={setCurrent} />
+      <main className="w-full h-[700px] relative">
+        <About currentScreen={currentScreen} />
+        <Projects currentScreen={currentScreen} />
         <div id="skills" className="box"></div>
         <div id="resume" className="box"></div>
       </main>

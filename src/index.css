@@ -5,6 +5,8 @@
 
 @theme {
   --animate-float: float 3s ease-in-out infinite;
+  --animate-fade: all 0.3s ease-in-out;
+
   @keyframes float {
     0%,
     100% {
@@ -20,6 +22,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -73,6 +76,7 @@ button {
 
 .header-links {
   @apply opacity-60;
+  transition: all 0.5s ease-in-out;
 }
 
 .active-link {
@@ -81,6 +85,7 @@ button {
 
 .box {
   @apply absolute top-0 opacity-0 invisible w-full flex justify-center items-center pt-20;
+  transition: all 0.5s ease-in-out;
 }
 
 .active-box {
@@ -96,9 +101,22 @@ button {
 }
 
 .box-projects {
-  @apply flex gap-6;
+  @apply flex w-[600px] h-[500px];
+}
+
+.box-projects-slider {
+  @apply flex justify-center items-center gap-6;
 }
 
 .box-project {
-  @apply flex flex-col gap-4 items-start;
+  @apply flex flex-col gap-4 items-start absolute top-0;
+  transition: all 0.5s ease-in-out;
+}
+
+.inactive-box {
+  @apply opacity-0 invisible;
+}
+
+.slider-icon {
+  @apply w-4;
 }
