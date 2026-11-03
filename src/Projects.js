@@ -5,27 +5,62 @@ const arrProjects = [
     name: "Banktist- A Banking App",
     src: "/banktist.png",
     link: "https://banktist-banking.vercel.app/",
+    about:
+      "Banktist is an online banking app which allows users to easily create accounts and use those accounts to send / recieve money. Of course this is all static and temporary. The only purpose was to master Vanilla JS.",
+    techStack: ["HTML", "CSS", "JavaScript"],
   },
   {
     name: "Eat-n-Split - Splitting Bills",
     src: "/eat-n-split.png",
     link: "https://eat-n-split-mu-smoky.vercel.app/",
+    about:
+      "Eat-n-Split is a website that works basically like a calculator. All it does is help you split your expenses with your friends and keep track of them all. The purpose of this was to practice fundamental React JS",
+    techStack: ["React JS", "Tailwind CSS"],
   },
   {
     name: "Dice Roll Game",
     src: "/dice-roll-game.png",
     link: "https://dice-roll-game-sage.vercel.app/",
+    about:
+      "Dice Roll Game is basically self-explanatory. There's two players, each get their turn rolling the dice, the first to get to a hundred, wins. The purpose was to practice Vanilla JS",
+    techStack: ["HTML", "CSS", "JavaScript"],
   },
 ];
 
-function Project({ name, src, link, active }) {
+function Skill({ skill }) {
+  return <li className="text-[18px] font-[500]">{skill}</li>;
+}
+
+function Project({ name, src, link, about, techStack, active }) {
+  const [explore, setExplore] = useState(false);
   return (
     <div className={`box-project ${active ? `active-box` : `inactive-box`}`}>
       <a href={link} target="_blank" rel="noreferrer">
         <h2>{name}</h2>
       </a>
-      <img src={src} alt="img-project" className="w-[600px] rounded-xl" />
-      <button className="active-link">Explore</button>
+      {explore ? (
+        <div className="w-[600px] h-[350px] rounded-xl bg-black/20 p-4">
+          <p className="text-[18px] font-[500] mb-4">{about}</p>
+          <h3 className="text-[22px] mb-2">Tech Stack</h3>
+          <ul>
+            {techStack.map((skill) => (
+              <Skill skill={skill} key={crypto.randomUUID()} />
+            ))}
+          </ul>
+        </div>
+      ) : (
+        <img
+          src={src}
+          alt="img-project"
+          className="w-[600px] h-[350px] rounded-xl"
+        />
+      )}
+      <button
+        className="active-link"
+        onClick={() => setExplore((current) => !current)}
+      >
+        {explore ? "Close" : "Explore"}
+      </button>
     </div>
   );
 }
@@ -65,6 +100,8 @@ export default function Projects({ currentScreen }) {
               name={project.name}
               src={project.src}
               link={project.link}
+              about={project.about}
+              techStack={project.techStack}
               active={currentProject === i ? true : false}
               key={project.link}
             />

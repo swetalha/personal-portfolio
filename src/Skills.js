@@ -1,16 +1,10 @@
+import Skill from "./Skill";
+
 const arrLanguages = ["HTML", "CSS", "JavaScript"];
 
 const arrFrameworkLibraries = ["React JS", "Tailwind CSS"];
 
 const arrOtherSkills = ["Claude Code", "Git and GitHub", "Vercel"];
-
-function Skill({ skill }) {
-  return (
-    <li className="active-link rounded-lg px-4 py-2 text-[18px] font-[500] my-2">
-      {skill}
-    </li>
-  );
-}
 
 export default function Skills({ currentScreen }) {
   return (
